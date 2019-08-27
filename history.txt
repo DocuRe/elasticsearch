@@ -1,0 +1,116 @@
+    1  k get nodes
+    2  kubectl get nodes
+    3  clear
+    4  git clone https://github.com/GoogleCloudPlatform/terraform-google-examples --recursive
+    5  cd terraform-google-examples
+    6  curl -L https://git.io/v51VZ -o ${HOME}/.tfdocker
+    7  source ${HOME}/.tfdocker
+    8  gcloud auth application-default login
+    9  export GOOGLE_PROJECT=$(gcloud config get-value project)
+   10  terraform init
+   11  ll
+   12  cd example-lb-https-content
+   13  ll
+   14  ll ..
+   15  ll ../
+   16  pwd
+   17  cd ..
+   18  ll
+   19  cd example-lb-https-content
+   20  terraform plan
+   21  terraform init
+   22  terraform plan
+   23  vi main.tf
+   24  terraform plan
+   25  terraform 0.12upgrade
+   26  terraform plan
+   27  date
+   28  ll
+   29  cd
+   30  ll
+   31  rm -rf terraform-google-examples/
+   32  sudo rm -rf terraform-google-examples/
+   33  ll
+   34  sudo rm -rf .terraform.d/
+   35  exit
+   36  cloudshell_open --repo_url "https://github.com/GoogleCloudPlatform/terraform-google-lb" --dir "examples/basic" --page "shell" --tutorial "README.md"
+   37  gcloud config set project jx-01-226119
+   38  terraform init
+   39  terraform plan
+   40  terraform version
+   41  terraform 0.12.2upgrade
+   42  terraform 0.12upgrade
+   43  terraform plan
+   44  terraform version
+   45  which terraform
+   46  wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
+   47  ll
+   48  unzip terraform_0.11.11_linux_amd64.zip
+   49  ll
+   50  sudo mv /usr/local/bin/terraform ~
+   51  sudo mv ./terraform /usr/local/bin/terraform
+   52  terraform version
+   53  terraform init
+   54  exit
+   55  cloudshell_open --repo_url "https://github.com/GoogleCloudPlatform/terraform-google-lb" --dir "examples/basic" --page "shell" --tutorial "README.md"
+   56  terraform version
+   57  terraform init
+   58  gcloud config set project jx-01-226119
+   59  terraform init
+   60  sudo rm /usr/local/bin/terraform 
+   61  sudo mv ~/terraform /usr/local/bin/terraform
+   62  terraform version
+   63  terraform init
+   64  terraform plan
+   65  terraform 0.12upgrade
+   66  terraform plan
+   67  ll
+   68  ll .terraform/
+   69  cat terraform.tfplan 
+   70  ll
+   71  cat test.sh 
+   72  exit
+   73  cloudshell_open --repo_url "https://github.com/GoogleCloudPlatform/click-to-deploy" --dir "k8s/elasticsearch" --open_in_editor "README.md"
+   74  kubectl get nodes
+   75  gcloud container clusters get-credentials jx-rox-srvls-cd --zone us-central1-c --project jx-01-226119
+   76  kubectl get nodes
+   77  kubectl get crd -A
+   78  kubectl get crd -all-namespaces
+   79  kubectl apply -f "https://raw.githubusercontent.com/GoogleCloudPlatform/marketplace-k8s-app-tools/master/crd/app-crd.yaml"
+   80  kubectl get crd -all-namespaces
+   81  kubectl get crd --all-namespaces
+   82  cd click-to-deploy/k8s/elasticsearch
+   83  ll
+   84  export APP_INSTANCE_NAME=elasticsearch-1
+   85  export NAMESPACE=dr-es
+   86  export REPLICAS=2
+   87  export METRICS_EXPORTER_ENABLED=false
+   88  TAG=6.3
+   89  export IMAGE_ELASTICSEARCH="marketplace.gcr.io/google/elasticsearch:${TAG}"
+   90  export IMAGE_INIT="marketplace.gcr.io/google/elasticsearch/ubuntu16_04:${TAG}"
+   91  export IMAGE_METRICS_EXPORTER="marketplace.gcr.io/google/elasticsearch/prometheus-to-sd:${TAG}"
+   92  docker info
+   93  for i in "IMAGE_ELASTICSEARCH" "IMAGE_INIT" "IMAGE_METRICS_EXPORTER"; do   repo=$(echo ${!i} | cut -d: -f1);   digest=$(docker pull ${!i} | sed -n -e 's/Digest: //p');   export $i="$repo@$digest";   env | grep $i; done
+   94  kubectl create namespace "$NAMESPACE"
+   95  helm template chart/elasticsearch   --name $APP_INSTANCE_NAME   --namespace $NAMESPACE   --set elasticsearch.initImage=$IMAGE_INIT   --set elasticsearch.image=$IMAGE_ELASTICSEARCH   --set elasticsearch.replicas=$REPLICAS   --set metrics.image=$IMAGE_METRICS_EXPORTER   --set metrics.enabled=$METRICS_EXPORTER_ENABLED > "${APP_INSTANCE_NAME}_manifest.yaml"
+   96  ll
+   97  less elasticsearch-1_manifest.yaml 
+   98  kubectl apply -f "${APP_INSTANCE_NAME}_manifest.yaml" --namespace "${NAMESPACE}"
+   99  echo "https://console.cloud.google.com/kubernetes/application/us-central1/jx-rox-srvls-cd/${NAMESPACE}/${APP_INSTANCE_NAME}"
+  100  kubectl get po
+  101  kubectl get po -n dr-es
+  102  curl -L "https://console.cloud.google.com/kubernetes/application/us-central1/jx-rox-srvls-cd/${NAMESPACE}/${APP_INSTANCE_NAME}"
+  103  echo "https://console.cloud.google.com/kubernetes/application/us-central1/jx-rox-srvls-cd/${NAMESPACE}/${APP_INSTANCE_NAME}"
+  104  kubectl delete -f ${APP_INSTANCE_NAME}_manifest.yaml --namespace $NAMESPACE
+  105  less elasticsearch-1_manifest.yaml 
+  106  export CLUSTER=jx-rox-srvls-cd
+  107  export ZONE=us-central1-c
+  108  kubectl apply -f "${APP_INSTANCE_NAME}_manifest.yaml" --namespace "${NAMESPACE}"
+  109  less elasticsearch-1_manifest.yaml 
+  110  echo "https://console.cloud.google.com/kubernetes/application/${ZONE}/${CLUSTER}/${NAMESPACE}/${APP_INSTANCE_NAME}"
+  111  pwd
+  112  ls -arlt
+  113  k get po
+  114  vi elasticsearch-1_manifest.yaml
+  115  pwd
+  116  history > hist.2019.08.26.txt

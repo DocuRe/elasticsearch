@@ -1,0 +1,15 @@
+Do I need a external ip for ES
+Install redis
+    https://github.com/GoogleCloudPlatform/professional-services/tree/master/examples/redis-cluster-gke
+    https://estl.tech/deploying-redis-with-persistence-on-google-kubernetes-engine-c1d60f70a043
+
+
+ jx-rox-srvls-cd	us-central1-c
+
+kubectl patch service/"elasticsearch-1-elasticsearch-svc" \
+    --namespace "dr-es" \
+    --patch '{"spec": {"type": "LoadBalancer"}}'
+
+SERVICE_IP=$(kubectl get service/elasticsearch-1-elasticsearch-svc \
+    --namespace dr-es \
+    --output jsonpath='{.status.loadBalancer.ingress[0].ip}')
